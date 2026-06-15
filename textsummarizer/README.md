@@ -1,9 +1,3 @@
-# AI API Projects
-
-A collection of small projects built with the Anthropic Claude API to explore LLM-powered tools.
-
-## Projects
-
 ### Text Summarizer
 A command-line tool that summarizes any text into 3 clear bullet points using the Claude API. Also tracks token usage and cost per request.
 
