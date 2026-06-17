@@ -13,8 +13,9 @@ Hands-on projects built using the Anthropic API in Python, focused on learning h
 
 | Project | Description |
 |---|---|
-| [Text Summarizer](./text-summarizer/) | Command-line tool that summarizes text using Claude, with token usage and cost tracking |
+| [Text Summarizer](./textSummarizer/) | Command-line tool that summarizes any text into 3 bullet points using Claude, with token usage and cost tracking |
 | [Resume Reviewer](./resumeReviewer/) | Analyzes a resume PDF and provides structured, actionable feedback in general or job-targeted mode |
+| [Experience DB — Resume Generator](./experienceDB/) | Stores your professional background in PostgreSQL and generates a tailored one-page resume PDF for any job description |
 
 ---
 
@@ -42,7 +43,7 @@ Each module folder contains a README documenting the thought process behind key 
 - **B.S. Computer Science** — Arizona State University, May 2024
 - **Teaching Assistant** — Data Structures, Algorithms, Digital Logic, Theory of Computation (2022–2024)
 
-**Technical skills:** Python, Java, C++, JavaScript, AWS (Lambda, S3, EC2, SQS, API Gateway), REST APIs, SQL, React, Docker, Git, Linux
+**Technical skills:** Python, Java, C++, JavaScript, AWS (Lambda, S3, EC2, SQS, API Gateway), REST APIs, SQL, PostgreSQL, React, Docker, Git, Linux
 
 ---
 
@@ -50,7 +51,6 @@ Each module folder contains a README documenting the thought process behind key 
 
 - AWS Solutions Architect – Associate certification
 - REST API backend project (API Gateway + Lambda + RDS + Cognito)
-- Resume Reviewer (Anthropic API)
 - Kubernetes basics
 
 I update this repository regularly as I build. If you're a recruiter or engineer and want to talk, feel free to reach out at tatung@asu.edu or connect on [LinkedIn](https://linkedin.com/in/thomas-tung-8a378524b).
