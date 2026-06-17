@@ -14,7 +14,7 @@ Hands-on projects built using the Anthropic API in Python, focused on learning h
 | Project | Description |
 |---|---|
 | [Text Summarizer](./text-summarizer/) | Command-line tool that summarizes text using Claude, with token usage and cost tracking |
-| Resume Reviewer *(in progress)* | Analyzes a resume against a job description and provides structured feedback |
+| [Resume Reviewer](./resumeReviewer/) | Analyzes a resume PDF and provides structured, actionable feedback in general or job-targeted mode |
 
 ---
 
