@@ -16,7 +16,7 @@ Hands-on projects built using the Anthropic API in Python, focused on learning h
 | [Text Summarizer](./textSummarizer/) | Command-line tool that summarizes any text into 3 bullet points using Claude, with token usage and cost tracking |
 | [Resume Reviewer](./resumeReviewer/) | Analyzes a resume PDF and provides structured, actionable feedback in general or job-targeted mode |
 | [Experience DB — Resume Generator](./experienceDB/) | Stores your professional background in PostgreSQL and generates a tailored one-page resume PDF for any job description |
-| [Phone Menu Router](./phoneMenuRouter/) | Routes natural language problem descriptions to the correct phone menu option using structured JSON output |
+| [Phone Menu Router](./phoneMenuRouter/) | Routes natural language problem descriptions to the correct phone menu option using structured JSON output and agentic clarification |
 
 ---
 
