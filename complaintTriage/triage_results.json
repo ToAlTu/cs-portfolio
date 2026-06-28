@@ -1,0 +1,201 @@
+{
+  "model": "claude-sonnet-4-6",
+  "session_cost_usd": 0.038801999999999996,
+  "cases": [
+    {
+      "id": "A_high_identity_theft",
+      "text": "I discovered an account with XXXX XXXX that I never opened. I received a card in the mail for a credit card I did not apply for. When I called they confirmed an account was opened in XX/XX/XXXX using my information. I have never authorized this and I am a victim of identity theft. This is now showing on my credit report and I need it removed immediately.",
+      "v1": {
+        "product": "Credit Card",
+        "issue": "Fraudulent account opened without authorization due to identity theft, negatively impacting credit report",
+        "severity": "HIGH",
+        "category_valid": false,
+        "cfpb_product": null,
+        "routing_team": "UNROUTABLE (category not in taxonomy)",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 166,
+          "output_tokens": 53,
+          "cost_usd": 0.0012929999999999999
+        }
+      },
+      "v2": {
+        "product": "credit_card",
+        "issue": "Fraudulent credit card account opened in consumer's name without authorization, now appearing on credit report",
+        "priority": 1,
+        "regulatory_flag": true,
+        "vulnerability_flag": false,
+        "rationale": "Active identity theft with an unauthorized account currently open and affecting the consumer's credit report \u2014 'I am a victim of identity theft' combined with an unresolved fraudulent account constitutes active fraud with ongoing financial risk, triggering Priority 1; FCRA and TILA implications apply given the unauthorized account and credit reporting impact.",
+        "recommended_action": "Human handler should verify identity, initiate fraud claim with the issuer, advise consumer to place a fraud alert or credit freeze with all three bureaus, and coordinate dispute submission under FCRA to have the tradeline removed. Confirm whether the account has any balance or transactions to assess further financial exposure.",
+        "confidence": 0.91,
+        "category_valid": true,
+        "cfpb_product": "Credit card",
+        "routing_team": "Card Services",
+        "escalate_to_human": false,
+        "needs_compliance_review": true,
+        "_usage": {
+          "input_tokens": 991,
+          "output_tokens": 229,
+          "cost_usd": 0.0064080000000000005
+        }
+      }
+    },
+    {
+      "id": "B_high_fcra_dispute",
+      "text": "I have disputed this same incorrect balance THREE times. The account shows a past due amount of $XXXX that I already paid in full in XX/XX/XXXX. I sent proof of payment. They keep verifying it as accurate without investigating. This error is hurting my credit score and I have been denied a loan because of it.",
+      "v1": {
+        "product": "Credit Reporting",
+        "issue": "Repeated dispute of incorrect past due balance not being properly investigated, negatively impacting credit score and resulting in loan denial",
+        "severity": "HIGH",
+        "category_valid": false,
+        "cfpb_product": null,
+        "routing_team": "UNROUTABLE (category not in taxonomy)",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 155,
+          "output_tokens": 60,
+          "cost_usd": 0.001365
+        }
+      },
+      "v2": {
+        "product": "credit_reporting",
+        "issue": "Repeated dispute of incorrect past-due balance not resolved; creditor verifying as accurate without investigation despite proof of payment submitted",
+        "priority": 2,
+        "regulatory_flag": true,
+        "vulnerability_flag": false,
+        "rationale": "The complaint describes a likely FCRA violation \u2014 'they keep verifying it as accurate without investigating' despite multiple disputes and submitted proof of payment \u2014 causing ongoing financial harm through credit score damage and a denied loan.",
+        "recommended_action": "Review dispute history and proof-of-payment documentation; assess whether the furnisher's repeated verification without investigation constitutes a failure to conduct a reasonable reinvestigation under FCRA Section 611 (15 U.S.C. \u00a7 1681i); consider escalating to compliance team if pattern of non-investigation is confirmed.",
+        "confidence": 0.91,
+        "category_valid": true,
+        "cfpb_product": "Credit reporting or other personal consumer reports",
+        "routing_team": "Credit Reporting Disputes",
+        "escalate_to_human": false,
+        "needs_compliance_review": true,
+        "_usage": {
+          "input_tokens": 980,
+          "output_tokens": 217,
+          "cost_usd": 0.006194999999999999
+        }
+      }
+    },
+    {
+      "id": "C_low_service",
+      "text": "I am very unhappy with this bank. I went to my local branch and it closed at XXXX even though the website said it was open later. The teller was rude and I waited almost 30 minutes. I have been a customer for years and this is not the service I expect. I am thinking about switching banks.",
+      "v1": {
+        "product": "Bank Branch / Retail Banking",
+        "issue": "Branch closed earlier than advertised online; rude teller and long wait time",
+        "severity": "MEDIUM",
+        "category_valid": false,
+        "cfpb_product": null,
+        "routing_team": "UNROUTABLE (category not in taxonomy)",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 153,
+          "output_tokens": 56,
+          "cost_usd": 0.001299
+        }
+      },
+      "v2": {
+        "product": "checking_savings",
+        "issue": "Branch closed earlier than advertised online; long wait time and rude teller",
+        "priority": 4,
+        "regulatory_flag": false,
+        "vulnerability_flag": false,
+        "rationale": "This is general service feedback with no financial harm, regulatory concern, or vulnerability indicator; the key phrase 'I am thinking about switching banks' signals dissatisfaction but no urgent or regulated matter.",
+        "recommended_action": "Send a standard acknowledgment and goodwill response; flag branch manager to verify published hours are accurate and address staff conduct; no compliance review required.",
+        "confidence": 0.92,
+        "category_valid": true,
+        "cfpb_product": "Checking or savings account",
+        "routing_team": "Deposit Account Servicing",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 978,
+          "output_tokens": 164,
+          "cost_usd": 0.0053939999999999995
+        }
+      }
+    },
+    {
+      "id": "D_ambiguous_scam",
+      "text": "I sent a wire transfer of $XXXX to someone I met online who said they would help me invest. Now I cannot reach them and the money is gone. I asked my bank to reverse it but they said they cannot. I think the bank should have warned me this was a scam. Someone needs to give me my money back.",
+      "v1": {
+        "product": "Wire Transfer / Money Transfer",
+        "issue": "Customer fell victim to an investment scam via wire transfer and is requesting a reversal of funds sent to a fraudulent party",
+        "severity": "HIGH",
+        "category_valid": false,
+        "cfpb_product": null,
+        "routing_team": "UNROUTABLE (category not in taxonomy)",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 153,
+          "output_tokens": 63,
+          "cost_usd": 0.0014039999999999999
+        }
+      },
+      "v2": {
+        "product": "money_transfer",
+        "issue": "Consumer victim of investment scam via wire transfer; funds unrecoverable and bank declining to reverse",
+        "priority": 1,
+        "regulatory_flag": true,
+        "vulnerability_flag": false,
+        "rationale": "Active fraud with money currently at risk/lost \u2014 'the money is gone' and consumer cannot reach the recipient \u2014 triggering Priority 1; regulatory flag set because potential EFTA and wire fraud obligations, as well as possible failure-to-warn or mis-selling exposure, warrant compliance review.",
+        "recommended_action": "A human handler should urgently review the wire transfer details and timeline to assess whether a recall or return request to the recipient bank is still possible; escalate to fraud/compliance team to evaluate any regulatory reporting obligations (e.g. SAR filing) and determine whether the bank's pre-transfer fraud warnings met applicable standards. Advise consumer to file a report with FTC, FBI IC3, and local law enforcement.",
+        "confidence": 0.82,
+        "category_valid": true,
+        "cfpb_product": "Money transfer, virtual currency, or money service",
+        "routing_team": "Payments & Transfers",
+        "escalate_to_human": false,
+        "needs_compliance_review": true,
+        "_usage": {
+          "input_tokens": 978,
+          "output_tokens": 247,
+          "cost_usd": 0.006639
+        }
+      }
+    },
+    {
+      "id": "E_ambiguous_multiproduct",
+      "text": "Something is going on with my accounts and I cannot get a straight answer. Money came out that I do not think I authorized, and there is also a charge from XX/XX/XXXX that I do not recognize. When I checked, there was an account or service listed that I do not remember opening. I have called XXXX several times and each person tells me something different and sends me to another department. Honestly I am not sure if this is a problem with my card, my checking account, or something on my credit report. I just need someone to figure out what actually happened and make it stop.",
+      "v1": {
+        "product": "Checking Account / Payment Card",
+        "issue": "Unauthorized charges and unrecognized account or service, with inconsistent support responses across multiple contacts",
+        "severity": "HIGH",
+        "category_valid": false,
+        "cfpb_product": null,
+        "routing_team": "UNROUTABLE (category not in taxonomy)",
+        "escalate_to_human": false,
+        "needs_compliance_review": false,
+        "_usage": {
+          "input_tokens": 210,
+          "output_tokens": 59,
+          "cost_usd": 0.0015149999999999999
+        }
+      },
+      "v2": {
+        "product": "other",
+        "issue": "Consumer reports unrecognized transactions, an unrecognized account or service, and contradictory information across multiple departments; unclear whether the issue involves a deposit account, credit card, or credit report",
+        "priority": 1,
+        "regulatory_flag": true,
+        "vulnerability_flag": false,
+        "rationale": "The complaint describes potential unauthorized transactions and an unrecognized account currently active \u2014 'Money came out that I do not think I authorized' and 'an account or service listed that I do not remember opening' \u2014 indicating possible active fraud or identity theft with money at risk, warranting Priority 1; regulatory flag is set because the facts, if confirmed, could implicate EFTA (unauthorized EFT), FCRA (unauthorized account on file), or FDCPA depending on resolution.",
+        "recommended_action": "A human handler should conduct a cross-product review across the consumer's checking account, credit card, and credit file to identify all anomalies; consider placing a temporary hold on suspicious activity and initiating a fraud investigation across all three potential surfaces before routing to a single owning team.",
+        "confidence": 0.62,
+        "category_valid": true,
+        "cfpb_product": "Other",
+        "routing_team": "Customer Relations",
+        "escalate_to_human": true,
+        "needs_compliance_review": true,
+        "_usage": {
+          "input_tokens": 1035,
+          "output_tokens": 279,
+          "cost_usd": 0.00729
+        }
+      }
+    }
+  ]
+}

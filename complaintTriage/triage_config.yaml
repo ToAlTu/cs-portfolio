@@ -1,0 +1,105 @@
+# Complaint-triage configuration (US / CFPB).
+#
+# This file is the lever the ops & compliance team controls. Edit categories,
+# severity rules, flags, and routing here; the classifier reads it and follows
+# it. No code change is needed to retune triage behaviour.
+#
+# Design: three SEPARATE axes, so they don't get conflated --
+#   1. category  -> WHO owns it (deterministic routing, by product)
+#   2. priority  -> HOW URGENT it is (1 = most urgent ... 4 = least)
+#   3. flags     -> independent signals (regulated matter? vulnerable consumer?)
+ 
+# --- Categories -----------------------------------------------------------
+# The 10 official CFPB top-level products. The model must return exactly one
+# `name`. `cfpb_product` is the exact regulator string, used to score the
+# model against the CFPB's own ground-truth label.
+categories:
+  - name: credit_reporting
+    cfpb_product: "Credit reporting or other personal consumer reports"
+    description: Credit reports, consumer reports, disputes over inaccurate or improperly used information.
+  - name: debt_collection
+    cfpb_product: "Debt collection"
+    description: Collection of a debt, including debts the consumer says they do not owe.
+  - name: credit_card
+    cfpb_product: "Credit card"
+    description: Credit card purchases, fees, billing, rewards, application problems.
+  - name: checking_savings
+    cfpb_product: "Checking or savings account"
+    description: Deposit accounts -- access, closures, overdraft fees, unauthorized transactions.
+  - name: money_transfer
+    cfpb_product: "Money transfer, virtual currency, or money service"
+    description: Wire transfers, P2P payments, virtual currency, money services; scams involving transfers.
+  - name: mortgage
+    cfpb_product: "Mortgage"
+    description: Mortgages -- payments, escrow, servicing, modification, foreclosure.
+  - name: vehicle_loan
+    cfpb_product: "Vehicle loan or lease"
+    description: Auto loans and leases -- financing, payments, repossession.
+  - name: student_loan
+    cfpb_product: "Student loan"
+    description: Federal or private student loans -- servicing, repayment, forgiveness.
+  - name: personal_loan
+    cfpb_product: "Payday loan, title loan, personal loan, or advance loan"
+    description: Payday, title, personal, or advance loans.
+  - name: prepaid_card
+    cfpb_product: "Prepaid card"
+    description: Prepaid or gift cards -- loading, access, unauthorized use.
+  - name: other
+    cfpb_product: "Other"
+    description: Anything that does not fit the categories above. Should not match real CFPB data.
+ 
+# --- Severity rules -> priority -------------------------------------------
+# Priority is 1 (highest / most urgent) to 4 (lowest). Apply the HIGHEST-
+# priority rule that matches; if none match, use the default.
+severity_rules:
+  - priority: 1
+    when: >
+      Active fraud, identity theft, or unauthorized transactions with money
+      currently at risk, or the consumer locked out of their own funds.
+  - priority: 1
+    when: >
+      A vulnerability indicator -- financial hardship, bereavement, serious
+      illness, disability, or acute distress -- combined with a time-sensitive
+      problem.
+  - priority: 2
+    when: >
+      A potentially regulated/reportable matter (e.g. a likely FCRA, FDCPA,
+      EFTA, or TILA violation, wrongful charge, or mis-selling) OR a service
+      failure causing ongoing financial impact.
+  - priority: 3
+    when: >
+      A standard complaint with limited financial impact and no urgency.
+  - priority: 4
+    when: >
+      A minor issue, general feedback, or a query unlikely to need formal
+      handling.
+  - priority: 3
+    default: true
+ 
+# --- Flags ----------------------------------------------------------------
+# Set independently of category and priority. A complaint can be low priority
+# but still regulatory-flagged, or vice versa.
+flags:
+  regulatory_flag: >
+    True when the complaint could be a reportable/regulated matter -- a likely
+    violation of a consumer-protection statute (FCRA, FDCPA, EFTA, TILA),
+    wrongful charge, or mis-selling -- that needs compliance review.
+  vulnerability_flag: >
+    True when the text indicates a vulnerable consumer -- financial hardship,
+    bereavement, serious illness, disability, mental-health distress, or similar.
+ 
+# --- Routing --------------------------------------------------------------
+# category -> owning team. Deterministic: the classifier looks the team up here
+# from the model's chosen category, so the model never invents a destination.
+routing:
+  credit_reporting: Credit Reporting Disputes
+  debt_collection: Collections Disputes
+  credit_card: Card Services
+  checking_savings: Deposit Account Servicing
+  money_transfer: Payments & Transfers
+  mortgage: Mortgage Servicing
+  vehicle_loan: Lending Operations
+  student_loan: Lending Operations
+  personal_loan: Lending Operations
+  prepaid_card: Card Services
+  other: Customer Relations

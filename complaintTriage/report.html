@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complaint Triage Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#E7EBEE; --surface:#FFFFFF; --ink:#13171D; --muted:#5E6976;
+  --line:#D3DAE0; --line-soft:#E6EBEF;
+  --accent:#15495A;
+  --p1:#B23A2E; --p2:#B07320; --p3:#3F6C8E; --p4:#79858F;
+  --reg:#5B43A0; --vuln:#1C7B68;
+  --bad:#B23A2E; --bad-wash:#FAEEEC; --ok:#15495A;
+  --hit:#1C7B68;
+}
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body {
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px; line-height:1.55;
+}
+.mono { font-family:"IBM Plex Mono",ui-monospace,monospace; }
+.wrap { max-width:1060px; margin:0 auto; padding:0 24px 80px; }
+
+/* Console header */
+.masthead { border-bottom:1.5px solid var(--ink); padding:30px 0 16px; margin-bottom:34px; }
+.masthead .wrap { padding-bottom:0; padding-top:0; display:flex; flex-wrap:wrap;
+  align-items:flex-end; justify-content:space-between; gap:14px; }
+.title { font-weight:700; font-size:26px; letter-spacing:-0.02em; line-height:1.05; }
+.title span { font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:13px;
+  letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);
+  display:block; margin-top:6px; }
+.runmeta { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted);
+  text-align:right; line-height:1.7; }
+.runmeta b { color:var(--ink); font-weight:600; }
+
+/* Panels */
+.panel { margin-bottom:46px; }
+.eyebrow { font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 10px; }
+h2 { font-size:27px; font-weight:700; letter-spacing:-0.02em; margin:0 0 10px; }
+.lede { color:var(--muted); max-width:60ch; margin:0 0 26px; }
+.lede em { color:var(--ink); font-style:normal; font-weight:600; }
+
+/* Eval metrics */
+.metric { background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:18px 20px; margin-bottom:14px; }
+.metric-head { display:flex; align-items:baseline; gap:12px; margin-bottom:14px;
+  flex-wrap:wrap; }
+.metric-name { font-weight:600; font-size:16px; }
+.metric-desc { color:var(--muted); font-size:13px; }
+.metric-row { display:grid; grid-template-columns:96px 1fr; align-items:center;
+  gap:14px; margin:7px 0; }
+.who { font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--muted); }
+.bar-track { display:grid; grid-template-columns:1fr 92px; align-items:center; gap:12px; }
+.bar-rail { height:24px; background:var(--line-soft); border-radius:2px; overflow:hidden; }
+.bar-fill { height:100%; width:var(--w); border-radius:2px 0 0 2px;
+  animation:grow .9s cubic-bezier(.2,.7,.2,1) both; }
+.bar-fill.v1 { background:#A6B0B8; }
+.bar-fill.v2 { background:var(--accent); }
+.bar-num { font-family:"IBM Plex Mono",monospace; font-size:12px; white-space:nowrap; }
+.bar-num b { font-size:14px; font-weight:600; }
+.bar-num span { color:var(--muted); margin-left:3px; }
+@keyframes grow { from { width:0; } to { width:var(--w); } }
+
+.evidence { margin-top:6px; }
+.evidence summary { cursor:pointer; font-family:"IBM Plex Mono",monospace; font-size:12.5px;
+  color:var(--accent); padding:6px 0; }
+.eval-table { width:100%; border-collapse:collapse; margin-top:10px; font-size:13px; }
+.eval-table th { text-align:left; font-family:"IBM Plex Mono",monospace; font-weight:500;
+  font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);
+  border-bottom:1px solid var(--line); padding:7px 10px; }
+.eval-table td { padding:7px 10px; border-bottom:1px solid var(--line-soft); }
+.eval-table td.num { color:var(--muted); font-family:"IBM Plex Mono",monospace; }
+.eval-table td.mono { font-family:"IBM Plex Mono",monospace; font-size:12.5px; }
+.eval-table td.muted { color:var(--muted); }
+.hit { color:var(--hit); font-weight:600; font-size:12px; }
+.miss { color:var(--muted); }
+
+.caveat { font-size:12.5px; color:var(--muted); line-height:1.6; margin-top:20px;
+  max-width:78ch; }
+.caveat .mono { font-size:11.5px; }
+
+/* Triage cases */
+.case { background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:0; margin-bottom:18px; overflow:hidden; }
+.case-head { display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:13px 18px; border-bottom:1px solid var(--line-soft); background:#FBFCFD; }
+.case-id { font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600;
+  letter-spacing:0.01em; }
+.complaint { margin:0; padding:15px 18px; color:#2C333B; font-size:14px;
+  border-bottom:1px solid var(--line-soft); background:#fff; }
+.diff { display:grid; grid-template-columns:1fr 1.35fr; }
+.col { padding:16px 18px; }
+.v1col { background:var(--bad-wash); border-right:1px solid var(--line); }
+.v2col { background:#fff; }
+.col-head { font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--ink); font-weight:600; margin-bottom:14px; }
+.col-head span { color:var(--muted); font-weight:400; }
+.field { margin-bottom:11px; }
+.field label { display:block; font-family:"IBM Plex Mono",monospace; font-size:10px;
+  letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
+.field.inline { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.field.inline label { margin:0; }
+.field.inline label.l2 { margin-left:8px; }
+.field p { margin:0; font-size:13.5px; }
+.field p.why { color:#39414A; font-size:13px; line-height:1.5; }
+.field p.sugg { color:#39414A; font-size:13px; line-height:1.5; }
+.nb { display:inline-block; margin-left:7px; font-family:"IBM Plex Mono",monospace;
+  font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);
+  border:1px solid var(--line); border-radius:2px; padding:1px 5px; vertical-align:middle; }
+.cat { font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500; }
+.cat.ok { color:var(--ok); }
+.cat.bad { color:var(--bad); text-decoration:line-through; text-decoration-thickness:1px; }
+.conf { font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:13px; }
+.route { font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:500; }
+.route.ok { color:var(--ink); }
+.route.bad { color:var(--bad); }
+
+.chip { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:11px;
+  font-weight:600; letter-spacing:0.02em; padding:3px 9px; border-radius:2px; color:#fff; }
+.chip.p1 { background:var(--p1); } .chip.p2 { background:var(--p2); }
+.chip.p3 { background:var(--p3); } .chip.p4 { background:var(--p4); }
+.chip.flat { background:#fff; color:var(--muted); border:1px solid var(--line); }
+
+.flag { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px;
+  font-weight:600; letter-spacing:0.04em; padding:2px 8px; border-radius:2px; }
+.flag.reg { color:var(--reg); background:#EFEBFA; }
+.flag.vuln { color:var(--vuln); background:#E5F4F0; }
+
+.signal { font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:500;
+  padding:8px 11px; border-radius:2px; margin-top:10px; }
+.signal.hold { color:#fff; background:var(--p1); }
+.signal.comp { color:var(--reg); background:#EFEBFA; border:1px solid #DAD0F4; }
+
+.muted { color:var(--muted); }
+
+footer { border-top:1px solid var(--line); padding-top:18px; margin-top:10px;
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted); line-height:1.7; }
+
+@media (max-width:720px) {
+  .diff { grid-template-columns:1fr; }
+  .v1col { border-right:none; border-bottom:1px solid var(--line); }
+  .runmeta { text-align:left; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .bar-fill { animation:none; }
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="title">Complaint Triage Console<span>CFPB · LLM-assisted routing</span></div>
+    <div class="runmeta">
+      model&nbsp; <b>claude-sonnet-4-6</b><br>
+      triage&nbsp; <b>$0.0388</b>&nbsp; · &nbsp;eval&nbsp; <b>$0.1296</b><br>
+      generated&nbsp; <b>2026-06-25</b>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  
+    <section class="panel eval">
+      <p class="eyebrow">Evaluation · scored against the CFPB's own product labels</p>
+      <h2>The governed prompt, measured</h2>
+      <p class="lede">Same model, same code &mdash; only the prompt differs. Two
+      metrics, because they measure different things: whether the output is
+      <em>routable</em>, and whether it's <em>right</em>.</p>
+
+      <div class="metric">
+        <div class="metric-head"><span class="metric-name">Conformance</span>
+          <span class="metric-desc">produced a valid, routable CFPB category</span></div>
+        <div class="metric-rows">
+          <div class="metric-row"><span class="who">V1 naive</span><div class="bar-track"><div class="bar-rail"><div class="bar-fill v1" style="--w:0%"></div></div><div class="bar-num"><b>0%</b> <span>0/12</span></div></div></div>
+          <div class="metric-row"><span class="who">V2 governed</span><div class="bar-track"><div class="bar-rail"><div class="bar-fill v2" style="--w:100%"></div></div><div class="bar-num"><b>100%</b> <span>12/12</span></div></div></div>
+        </div>
+      </div>
+
+      <div class="metric">
+        <div class="metric-head"><span class="metric-name">Understanding</span>
+          <span class="metric-desc">matched the CFPB product (normalized, fair to V1's free text)</span></div>
+        <div class="metric-rows">
+          <div class="metric-row"><span class="who">V1 naive</span><div class="bar-track"><div class="bar-rail"><div class="bar-fill v1" style="--w:58%"></div></div><div class="bar-num"><b>58%</b> <span>7/12</span></div></div></div>
+          <div class="metric-row"><span class="who">V2 governed</span><div class="bar-track"><div class="bar-rail"><div class="bar-fill v2" style="--w:75%"></div></div><div class="bar-num"><b>75%</b> <span>9/12</span></div></div></div>
+        </div>
+      </div>
+
+      <details class="evidence">
+        <summary>Per-case detail &middot; 12 complaints</summary>
+        <table class="eval-table">
+          <thead><tr><th>#</th><th>CFPB label</th><th>V1</th><th></th><th>V2</th><th></th></tr></thead>
+          <tbody><tr><td class="num">1</td><td class="mono">personal_loan</td><td class="mono muted">credit_reporting</td><td class="miss">—</td><td class="mono">credit_reporting</td><td class="miss">—</td></tr><tr><td class="num">2</td><td class="mono">credit_card/prepaid_card</td><td class="mono muted">credit_card</td><td class="hit">match</td><td class="mono">credit_card</td><td class="hit">match</td></tr><tr><td class="num">3</td><td class="mono">vehicle_loan</td><td class="mono muted">vehicle_loan</td><td class="hit">match</td><td class="mono">vehicle_loan</td><td class="hit">match</td></tr><tr><td class="num">4</td><td class="mono">student_loan</td><td class="mono muted">student_loan</td><td class="hit">match</td><td class="mono">student_loan</td><td class="hit">match</td></tr><tr><td class="num">5</td><td class="mono">checking_savings</td><td class="mono muted">checking_savings</td><td class="hit">match</td><td class="mono">checking_savings</td><td class="hit">match</td></tr><tr><td class="num">6</td><td class="mono">checking_savings</td><td class="mono muted"></td><td class="miss">—</td><td class="mono">checking_savings</td><td class="hit">match</td></tr><tr><td class="num">7</td><td class="mono">checking_savings</td><td class="mono muted">credit_card</td><td class="miss">—</td><td class="mono">checking_savings</td><td class="hit">match</td></tr><tr><td class="num">8</td><td class="mono">credit_card/prepaid_card</td><td class="mono muted">credit_card</td><td class="hit">match</td><td class="mono">credit_reporting</td><td class="miss">—</td></tr><tr><td class="num">9</td><td class="mono">money_transfer</td><td class="mono muted">money_transfer</td><td class="hit">match</td><td class="mono">money_transfer</td><td class="hit">match</td></tr><tr><td class="num">10</td><td class="mono">debt_collection</td><td class="mono muted">vehicle_loan</td><td class="miss">—</td><td class="mono">vehicle_loan</td><td class="miss">—</td></tr><tr><td class="num">11</td><td class="mono">debt_collection</td><td class="mono muted">credit_reporting</td><td class="miss">—</td><td class="mono">debt_collection</td><td class="hit">match</td></tr><tr><td class="num">12</td><td class="mono">checking_savings</td><td class="mono muted">checking_savings</td><td class="hit">match</td><td class="mono">checking_savings</td><td class="hit">match</td></tr></tbody>
+        </table>
+      </details>
+
+      <p class="caveat">CFPB product is consumer-selected at filing &mdash; a reasonable
+      benchmark, not perfect truth; an occasional miss is the model being more right than the
+      filer. Severity and priority are not scored (the CFPB publishes no urgency label).
+      Sample drawn from <span class="mono">file: complaints-2026-06-25_17_28.json</span>.</p>
+    </section>
+  
+    <section class="panel triage">
+      <p class="eyebrow">Live triage · five complaints, two prompts each</p>
+      <h2>How each complaint is sorted</h2>
+      <p class="lede">The naive prompt invents categories nothing can route. The
+      governed prompt returns a real CFPB category, a priority, independent flags,
+      a routable team, and &mdash; when it isn't sure &mdash; a hold for a human.</p>
+      <div class="cases">
+    <article class="case">
+      <div class="case-head">
+        <span class="case-id">A_high_identity_theft</span>
+        <span class="chip prio p1">P1 · Urgent</span>
+      </div>
+      <p class="complaint">I discovered an account with XXXX XXXX that I never opened. I received a card in the mail for a credit card I did not apply for. When I called they confirmed an account was opened in XX/XX/XXXX using my information. I have never authorized this and I am a victim of identity theft. This is now showing on my credit report and I need it removed immediately.</p>
+      <div class="diff">
+        
+      <div class="col v1col">
+        <div class="col-head">V1 <span>naive</span></div>
+        <div class="field"><label>product</label><span class="cat bad">Credit Card</span></div>
+        <div class="field"><label>issue</label><p>Fraudulent account opened without authorization due to identity theft, negatively impacting credit report</p></div>
+        <div class="field"><label>severity</label><span class="chip flat">HIGH</span></div>
+        <div class="field"><label>routing</label><span class="route bad">UNROUTABLE (category not in taxonomy)</span></div>
+      </div>
+        
+      <div class="col v2col">
+        <div class="col-head">V2 <span>governed</span></div>
+        <div class="field"><label>product</label><span class="cat ok">credit_card</span></div>
+        <div class="field"><label>issue</label><p>Fraudulent credit card account opened in consumer&#x27;s name without authorization, now appearing on credit report</p></div>
+        <div class="field inline"><label>priority</label><span class="chip prio p1">P1 · Urgent</span>
+          <label class="l2">flags</label><span class="flag reg">Regulatory</span>
+          <label class="l2">conf</label><span class="conf">0.91</span></div>
+        <div class="field"><label>why</label><p class="why">Active identity theft with an unauthorized account currently open and affecting the consumer&#x27;s credit report — &#x27;I am a victim of identity theft&#x27; combined with an unresolved fraudulent account constitutes active fraud with ongoing financial risk, triggering Priority 1; FCRA and TILA implications apply given the unauthorized account and credit reporting impact.</p></div>
+        <div class="field"><label>suggested</label><p class="sugg">Human handler should verify identity, initiate fraud claim with the issuer, advise consumer to place a fraud alert or credit freeze with all three bureaus, and coordinate dispute submission under FCRA to have the tradeline removed. Confirm whether the account has any balance or transactions to assess further financial exposure.<span class="nb">non-binding</span></p></div>
+        <div class="field"><label>routing</label><span class="route ok">Card Services</span></div>
+        <div class="signal comp">Route to compliance · regulatory flag</div>
+      </div>
+      </div>
+    </article>
+    <article class="case">
+      <div class="case-head">
+        <span class="case-id">B_high_fcra_dispute</span>
+        <span class="chip prio p2">P2 · Elevated</span>
+      </div>
+      <p class="complaint">I have disputed this same incorrect balance THREE times. The account shows a past due amount of $XXXX that I already paid in full in XX/XX/XXXX. I sent proof of payment. They keep verifying it as accurate without investigating. This error is hurting my credit score and I have been denied a loan because of it.</p>
+      <div class="diff">
+        
+      <div class="col v1col">
+        <div class="col-head">V1 <span>naive</span></div>
+        <div class="field"><label>product</label><span class="cat bad">Credit Reporting</span></div>
+        <div class="field"><label>issue</label><p>Repeated dispute of incorrect past due balance not being properly investigated, negatively impacting credit score and resulting in loan denial</p></div>
+        <div class="field"><label>severity</label><span class="chip flat">HIGH</span></div>
+        <div class="field"><label>routing</label><span class="route bad">UNROUTABLE (category not in taxonomy)</span></div>
+      </div>
+        
+      <div class="col v2col">
+        <div class="col-head">V2 <span>governed</span></div>
+        <div class="field"><label>product</label><span class="cat ok">credit_reporting</span></div>
+        <div class="field"><label>issue</label><p>Repeated dispute of incorrect past-due balance not resolved; creditor verifying as accurate without investigation despite proof of payment submitted</p></div>
+        <div class="field inline"><label>priority</label><span class="chip prio p2">P2 · Elevated</span>
+          <label class="l2">flags</label><span class="flag reg">Regulatory</span>
+          <label class="l2">conf</label><span class="conf">0.91</span></div>
+        <div class="field"><label>why</label><p class="why">The complaint describes a likely FCRA violation — &#x27;they keep verifying it as accurate without investigating&#x27; despite multiple disputes and submitted proof of payment — causing ongoing financial harm through credit score damage and a denied loan.</p></div>
+        <div class="field"><label>suggested</label><p class="sugg">Review dispute history and proof-of-payment documentation; assess whether the furnisher&#x27;s repeated verification without investigation constitutes a failure to conduct a reasonable reinvestigation under FCRA Section 611 (15 U.S.C. § 1681i); consider escalating to compliance team if pattern of non-investigation is confirmed.<span class="nb">non-binding</span></p></div>
+        <div class="field"><label>routing</label><span class="route ok">Credit Reporting Disputes</span></div>
+        <div class="signal comp">Route to compliance · regulatory flag</div>
+      </div>
+      </div>
+    </article>
+    <article class="case">
+      <div class="case-head">
+        <span class="case-id">C_low_service</span>
+        <span class="chip prio p4">P4 · Low</span>
+      </div>
+      <p class="complaint">I am very unhappy with this bank. I went to my local branch and it closed at XXXX even though the website said it was open later. The teller was rude and I waited almost 30 minutes. I have been a customer for years and this is not the service I expect. I am thinking about switching banks.</p>
+      <div class="diff">
+        
+      <div class="col v1col">
+        <div class="col-head">V1 <span>naive</span></div>
+        <div class="field"><label>product</label><span class="cat bad">Bank Branch / Retail Banking</span></div>
+        <div class="field"><label>issue</label><p>Branch closed earlier than advertised online; rude teller and long wait time</p></div>
+        <div class="field"><label>severity</label><span class="chip flat">MEDIUM</span></div>
+        <div class="field"><label>routing</label><span class="route bad">UNROUTABLE (category not in taxonomy)</span></div>
+      </div>
+        
+      <div class="col v2col">
+        <div class="col-head">V2 <span>governed</span></div>
+        <div class="field"><label>product</label><span class="cat ok">checking_savings</span></div>
+        <div class="field"><label>issue</label><p>Branch closed earlier than advertised online; long wait time and rude teller</p></div>
+        <div class="field inline"><label>priority</label><span class="chip prio p4">P4 · Low</span>
+          <label class="l2">flags</label><span class="muted">none</span>
+          <label class="l2">conf</label><span class="conf">0.92</span></div>
+        <div class="field"><label>why</label><p class="why">This is general service feedback with no financial harm, regulatory concern, or vulnerability indicator; the key phrase &#x27;I am thinking about switching banks&#x27; signals dissatisfaction but no urgent or regulated matter.</p></div>
+        <div class="field"><label>suggested</label><p class="sugg">Send a standard acknowledgment and goodwill response; flag branch manager to verify published hours are accurate and address staff conduct; no compliance review required.<span class="nb">non-binding</span></p></div>
+        <div class="field"><label>routing</label><span class="route ok">Deposit Account Servicing</span></div>
+        
+      </div>
+      </div>
+    </article>
+    <article class="case">
+      <div class="case-head">
+        <span class="case-id">D_ambiguous_scam</span>
+        <span class="chip prio p1">P1 · Urgent</span>
+      </div>
+      <p class="complaint">I sent a wire transfer of $XXXX to someone I met online who said they would help me invest. Now I cannot reach them and the money is gone. I asked my bank to reverse it but they said they cannot. I think the bank should have warned me this was a scam. Someone needs to give me my money back.</p>
+      <div class="diff">
+        
+      <div class="col v1col">
+        <div class="col-head">V1 <span>naive</span></div>
+        <div class="field"><label>product</label><span class="cat bad">Wire Transfer / Money Transfer</span></div>
+        <div class="field"><label>issue</label><p>Customer fell victim to an investment scam via wire transfer and is requesting a reversal of funds sent to a fraudulent party</p></div>
+        <div class="field"><label>severity</label><span class="chip flat">HIGH</span></div>
+        <div class="field"><label>routing</label><span class="route bad">UNROUTABLE (category not in taxonomy)</span></div>
+      </div>
+        
+      <div class="col v2col">
+        <div class="col-head">V2 <span>governed</span></div>
+        <div class="field"><label>product</label><span class="cat ok">money_transfer</span></div>
+        <div class="field"><label>issue</label><p>Consumer victim of investment scam via wire transfer; funds unrecoverable and bank declining to reverse</p></div>
+        <div class="field inline"><label>priority</label><span class="chip prio p1">P1 · Urgent</span>
+          <label class="l2">flags</label><span class="flag reg">Regulatory</span>
+          <label class="l2">conf</label><span class="conf">0.82</span></div>
+        <div class="field"><label>why</label><p class="why">Active fraud with money currently at risk/lost — &#x27;the money is gone&#x27; and consumer cannot reach the recipient — triggering Priority 1; regulatory flag set because potential EFTA and wire fraud obligations, as well as possible failure-to-warn or mis-selling exposure, warrant compliance review.</p></div>
+        <div class="field"><label>suggested</label><p class="sugg">A human handler should urgently review the wire transfer details and timeline to assess whether a recall or return request to the recipient bank is still possible; escalate to fraud/compliance team to evaluate any regulatory reporting obligations (e.g. SAR filing) and determine whether the bank&#x27;s pre-transfer fraud warnings met applicable standards. Advise consumer to file a report with FTC, FBI IC3, and local law enforcement.<span class="nb">non-binding</span></p></div>
+        <div class="field"><label>routing</label><span class="route ok">Payments &amp; Transfers</span></div>
+        <div class="signal comp">Route to compliance · regulatory flag</div>
+      </div>
+      </div>
+    </article>
+    <article class="case">
+      <div class="case-head">
+        <span class="case-id">E_ambiguous_multiproduct</span>
+        <span class="chip prio p1">P1 · Urgent</span>
+      </div>
+      <p class="complaint">Something is going on with my accounts and I cannot get a straight answer. Money came out that I do not think I authorized, and there is also a charge from XX/XX/XXXX that I do not recognize. When I checked, there was an account or service listed that I do not remember opening. I have called XXXX several times and each person tells me something different and sends me to another department. Honestly I am not sure if this is a problem with my card, my checking account, or something on my credit report. I just need someone to figure out what actually happened and make it stop.</p>
+      <div class="diff">
+        
+      <div class="col v1col">
+        <div class="col-head">V1 <span>naive</span></div>
+        <div class="field"><label>product</label><span class="cat bad">Checking Account / Payment Card</span></div>
+        <div class="field"><label>issue</label><p>Unauthorized charges and unrecognized account or service, with inconsistent support responses across multiple contacts</p></div>
+        <div class="field"><label>severity</label><span class="chip flat">HIGH</span></div>
+        <div class="field"><label>routing</label><span class="route bad">UNROUTABLE (category not in taxonomy)</span></div>
+      </div>
+        
+      <div class="col v2col">
+        <div class="col-head">V2 <span>governed</span></div>
+        <div class="field"><label>product</label><span class="cat ok">other</span></div>
+        <div class="field"><label>issue</label><p>Consumer reports unrecognized transactions, an unrecognized account or service, and contradictory information across multiple departments; unclear whether the issue involves a deposit account, credit card, or credit report</p></div>
+        <div class="field inline"><label>priority</label><span class="chip prio p1">P1 · Urgent</span>
+          <label class="l2">flags</label><span class="flag reg">Regulatory</span>
+          <label class="l2">conf</label><span class="conf">0.62</span></div>
+        <div class="field"><label>why</label><p class="why">The complaint describes potential unauthorized transactions and an unrecognized account currently active — &#x27;Money came out that I do not think I authorized&#x27; and &#x27;an account or service listed that I do not remember opening&#x27; — indicating possible active fraud or identity theft with money at risk, warranting Priority 1; regulatory flag is set because the facts, if confirmed, could implicate EFTA (unauthorized EFT), FCRA (unauthorized account on file), or FDCPA depending on resolution.</p></div>
+        <div class="field"><label>suggested</label><p class="sugg">A human handler should conduct a cross-product review across the consumer&#x27;s checking account, credit card, and credit file to identify all anomalies; consider placing a temporary hold on suspicious activity and initiating a fraud investigation across all three potential surfaces before routing to a single owning team.<span class="nb">non-binding</span></p></div>
+        <div class="field"><label>routing</label><span class="route ok">Customer Relations</span></div>
+        <div class="signal hold">Hold for human · low confidence</div><div class="signal comp">Route to compliance · regulatory flag</div>
+      </div>
+      </div>
+    </article></div>
+    </section>
+  <footer>
+    Classification is probabilistic; routing is deterministic (category &rarr; team, by config).
+    A human makes the final decision &mdash; recommended actions are advisory.<br>
+    Built on the Anthropic API · prompts and taxonomy are editable config, not code.
+  </footer>
+</main>
+</body>
+</html>

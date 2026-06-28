@@ -1,0 +1,218 @@
+{
+  "source": "file: complaints-2026-06-25_17_28.json",
+  "model": "claude-sonnet-4-6",
+  "cost_usd": 0.12960599999999997,
+  "rows": [
+    {
+      "text": "My credit report shows the balance if I continue making minimum payments for the entire loan term but it doesnt show the payoff amount, in other words its showing more than what was borrowed including all interest and fees. \nMy monthly statements also show this and not the payoff amount",
+      "ground_truth": "Payday loan, title loan, or personal loan",
+      "ground_truth_bucket": "personal_loan",
+      "v1": {
+        "predicted": "Consumer Loan / Credit Reporting",
+        "bucket": "credit_reporting",
+        "match": false,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "credit_reporting",
+        "bucket": "credit_reporting",
+        "match": false,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "On XX/XX/XXXX I ordered a TV online from a retailer through a website named XXXX the retailer was XXXX XXXX in XXXX, TN. The cost of the TV was for {$2400.00}. The TV was delivered on XXXX XXXX. Before TV arrival I had some issues with pricing. Contacted retailer explained my concern. They refunded {$50.00} to help wit issue. During this time I had order issues with TV not functioning well and notified that I would have to pay return shipping back. I filled a dispute with Chase Business Preferred Credit Card Visa. On XXXX XXXX I filed a dispute of charges with my Chase Visa Dispute department. The funds where returned to my account. On XXXX XXXX, the individual from the Retail store contacted asking me what was wrong with the TV and they most surely can return the TV at no fee or charge. She stated that the only way to do this would be to cancel the dispute with my credit card. The shipper contacted me and arranged for pick-up of TV on XX/XX/XXXX. \nI contacted Chase Dispute Department on XXXX XXXX and spoke to a specialist on the phone and explained that I was instructed to close the dispute in order to get a refund from the retailer. I expressed some concerns if this was the appropriate way of handling this with the dispute department and asked for some advise if this would be an issue in the future if I for some reason did not receive my refund. The Chase Dispute specialist on the phone stated that these issues arise all the time and parties come to agreement. She stated that the only issue would be that dispute would have to be reopened by letter if need to reopen it. The specialist from Chase dispute department that day did not explain anything else to me of how in cancel the dispute I may not be able to get any help from the dispute department. So with the Chase Dispute specialist help that day I felt comfortable cancelling the dispute. On XX/XX/XXXX funds returned back to the retailer. \nIn meanwhile Tv was delivered to warehouse on XXXX XXXX. On XX/XX/XXXX I contacted the retailer and was told that the charge was on hold by XXXX, XXXX XXXX XXXX. I was told it was on hold because case was not closed. I called the chase dispute department and spoke to supervisory on XXXX XXXX explaining that funds are not able to be returned because of a hold on funds. Even a conference call was attempted by myself with a somewhat reluctant supervisor to XXXX and we attempted to explain case was closed and refund was requested by retailer. \nOn XX/XX/XXXX nothing had occurred on my refund and I called Chase Dispute department explaining my concern. I was told to draft a letter requesting reponing of my case. I immediately did that same day and uploaded it to the chase visa website. It took over 3 weeks to review the case, only for chase to close it immediately stating that it was too late for them to do anything because I canceled dispute initially. \nI called multiple time to try to speak with supervisory at the Chase Visa Dispute department and they all told me that the person that I spoke to the day I called to close my dispute should have informed me of what the consequences are for closing a dispute. I was not appropriately informed by the specialist at case dispute the day I called with concern about cancelling dispute. \nTill this day XX/XX/XXXX I still have not received my refund from this retailer of approx. {$2500.00} because the dispute was cancelled and unable to be reopened. I have been told by retailer on multiple emails that they received the Tv and have been trying to refund me but there are some problems on this transaction with XXXX stating to the retailer the case is still open and not resolved my the other bank, which would be Chase Visa.\n\nI have asked for my bank to try to help me resolve this by contacting XXXX to fix this problem but they refuse to do anything and unfortunately all I have had is many hours of frustration because of the day I called a listened to the Chase visa dispute specialist lack of information regarding what would happen if I cancelled this dispute.",
+      "ground_truth": "Credit card or prepaid card",
+      "ground_truth_bucket": "credit_card/prepaid_card",
+      "v1": {
+        "predicted": "Credit Card (Chase Business Preferred Visa)",
+        "bucket": "credit_card",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "credit_card",
+        "bucket": "credit_card",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "In XX/XX/XXXX, I went to a car dealership with a pre-approval from Navy Federal. Importantly I purchased the car with the pre-approval in New Jersey, and I am a North Carolina resident. Having paid the title fee, I was told by both the dealership and Navy Federal confirmed that the transfer of the title would be transferred to Navy Federal as required. While Navy Federal changed the initial interest rate from the one shown after the initial purchase should be noted, but it's not the primary concern I'm reporting here. \n\nIn XX/XX/XXXX, I noticed Navy Federal had increased the rate of the loan to 15.29 % without notifying me of the increase in my rate. When I called Navy Federal in XXXX to inquire, they revealed that they had increased the rate because they had not received the title. I asked again if that was something I was supposed to provide them, and they confirmed that was something they receive in the normal course from the dealership. During the XXXX - XXXX time period, Navy Federal had sent me over 40 emails, almost all of which were marketing emails, but not a single email about the increase in rate or the missing document. Further, in the secure messaging on their own website, there was no message about the predatory increase or the failure of Navy Federal and the dealership to appropriately transfer the title. During this time, I received no phone calls or text messages from Navy Federal. On the phone, they claimed they sent a notification via mail, but I have never received the alleged correspondence. Further, they could not confirm the address they'd provided the notices. They claimed it was for security reasons, but I had already answered all their security questions and been cleared. Even if the \" notification '' actually existed, it's obvious they were intentionally avoiding using a reliable communication channel ( email, secure mail, phone, or text messages ). They were not using the same communication tools they use to market their services or provide my typical account notices. On the phone, they told me I had to call the dealership, and there was nothing they could do. The loan would continue at the predatory rate. I called the dealership, XXXX XXXX XXXX in XXXX New Jersey, who confirmed they had appropriately handled the title in XX/XX/XXXX. At no point have I ever had possession of the title. \n\nFinally, I had the payments for the car payment set to autopay at the appropriate amount for the original rate. However, when they increased the rate without notifying me, one payment at the new predatory rate, was listed as not fully paid. I had to scramble to make up the {$300.00} in additional monthly interest to try to avoid this affecting my credit report. They have not confirmed that they will not report it as a missed payment on my credit report. \n\nAgain, I tried to report this to Navy Federal, and they said they could not respond because I'd initiated this request through their mobile app. I notified them I would be contacting the CFPB as I could not resolve this with the bank directly. \n\nPlease investigate the predatory auto lending practices and lack of appropriate notification at Navy Federal Credit Union. Auto Loan XXXX.",
+      "ground_truth": "Vehicle loan or lease",
+      "ground_truth_bucket": "vehicle_loan",
+      "v1": {
+        "predicted": "Auto Loan",
+        "bucket": "vehicle_loan",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "vehicle_loan",
+        "bucket": "vehicle_loan",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "This is ridiculous that i have to open yet another case against American Education Services ( AES ) since they said FFEL loans are not covered by forbearance. I am actively trying to locate others who are experiencing the same issues bc this now seems predatory. Every federal loan program that is eligible for Biden relief is on forbearance except anything from AES. They scheme to find any way to charge and report negative credit info based on reinterpretation of details. They are using the letter against the spirit of the forbearance. I have a whole child to put in college by myself and cant pay my own debt. Yet my other student loan company clearly understands the assignment as they have me on forbearance with the same loan type. This is the 2nd time they have done this and got away with is based off XXXX about the type of FEDERAL loan i have AND using my personal forbearance as opposed to using the federal mandate. They are flagrantly flaunting government defiance by publicly denying adherence. PLEASE for the love of XXXX stop their predatory practices not to mention the {$16000.00} additional fees they have continued to add since interest accrual HAS NEVER STOPPED!",
+      "ground_truth": "Student loan",
+      "ground_truth_bucket": "student_loan",
+      "v1": {
+        "predicted": "Student Loan",
+        "bucket": "student_loan",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "student_loan",
+        "bucket": "student_loan",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "i have payments coming out every paycheck bc i have direct deposit but for some odd reason my bills never go thru so i always end up owing the bank not once have i not whats the purpose of having a bank account when your money isnt save in there i have XXXX bills now in collections bc not once have they been paid but they are direct deposit and whose going to take them out of collections for me definitely not bofa i have to pay all the late fees and the missed payments now i what do i do???",
+      "ground_truth": "Checking or savings account",
+      "ground_truth_bucket": "checking_savings",
+      "v1": {
+        "predicted": "Checking Account",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "checking_savings",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "Bank of America ( as well as other major banks ) makes special effort to be opaque about the fees that are associated with specific bank accounts. For example, despite my efforts, I was not able to find on my online account what fees are associated with incoming international wires ( the best I could find is \" fees varies '' ). There should be an easy to find link from each online account that specifies clearly what are the fees associated with every transaction for this particular account. Right now it is extremely hard, and the feeling is that the bank deliberately makes it hard to figure out.",
+      "ground_truth": "Checking or savings account",
+      "ground_truth_bucket": "checking_savings",
+      "v1": {
+        "predicted": "Bank Account",
+        "bucket": null,
+        "match": false,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "checking_savings",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "I noticed that I had fraudulent charges taken out of my Bank of America account. I reported it and the bank gave the money back. The first one was claim XXXX credited back on XXXX XXXX in the amount of {$1400.00} dollars. On XXXX XXXX the credit was reversed. Which put my account in the negative and incurred many overdraft fees. After I called in about it I was apologized to and told it would be back in my account after a few days. This never happened. The second call made it was discovered that my account information was used to pay an parking ticket out of town for someone named XXXX I was told. I informed the bank again I have not authorized the transaction and do not know that person. I was apologized to again and told that they would re-investigate and would return my funds shortly. I called again a few days later and was told that my email address was used and yet another investigation was necessary and again apologized and said Ill get receive my funds back shortly. I have yet to receive those funds. I was promised I would be made whole before XXXX. But my holidays were ruined. \n\nClaim XXXX in the amount of XXXX and XXXX were unauthorized charges made on that closed debit card. Once the card was replaced those fraudulent chargers where able to still be taken out of my account. Even with a new debit card. Credits were made replacing my money on XX/XX/XXXX and again taken back from my account XX/XX/XXXX and XX/XX/XXXX XXXX",
+      "ground_truth": "Checking or savings account",
+      "ground_truth_bucket": "checking_savings",
+      "v1": {
+        "predicted": "Checking Account / Debit Card",
+        "bucket": "credit_card",
+        "match": false,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "checking_savings",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "FORMAL COMPLAINT Formal Request Account Number Ending in XXXX My name is XXXX XXXX, and I am writing to you, to request the removal of all negative payments from my credit report ( XXXX, XXXX, XXXX ). In support, I want to state the following : 1. The account was opened on XX/XX/XXXX. \n2. On XX/XX/XXXX, I entered into a verbal agreement with Synchrony Bank, due to COVID19 financial complications. \n3. On XX/XX/XXXX, I received a Synchrony Bank letter that laid out the COVID19 recovery plan I was enrolled and approved for. \nA. A 60-month special payment plan program set to expire on XX/XX/XXXX B. The plan reduced the monthly minimums to {$36.00} per month. \nC. A reduced interest rate of 0 % APR will be applied to your next billing cycle. \nD. The account is closed for future purchases. \nE. The Customer Assistance Plan extends up to 60 months from the date of this letter, unless completed or terminated earlier. ( Maturity date was extended ) The Coronavirus Aid, Relief, and Economic Security Act ( CARES Act ) will provide emergency assistance to healthcare providers, individuals, families, and businesses affected by the novel Coronavirus ( COVID-19 ). \n\nThe CARES Act protection covers a \" covered period '' as the period starting XX/XX/XXXX, until 120 days after the end of the national state of emergency declaration, which is XX/XX/XXXX. \n\nIf the consumer was current on an obligation at the time of an accommodation approval, the account must be reported to CRAs as current if the consumer is complying with the accommodation agreement. 15 U.S.C. 1681s-2 ( a ) ( 1 ( F ) ( ii ) ( I ). \n\nIn XX/XX/XXXX, my statement was around {$250.00}, and in XX/XX/XXXX, my statement dramatically increased to around {$1600.00} ( 84.76 % fee increase ). \n\nMeanwhile I was still current, I was informed over the phone the interest were going to be removed, since I was in a COVID19 program. \n\nI requested a new statement, because I was completing all my payments and I did not want any issues. \n\nThe representative assured me that a new statement would be sent out, and I could pay the amount I owed, which was around {$250.00}. I never received the corrected statement. \n\nI was later informed that the 84.76 % fee increase was due to a special promotion which incurred backup interest, and this goes against the written agreement ( A reduced interest rate of 0 % APR will be applied to your next billing cycle and payment plan program set to expire on XX/XX/XXXX ), received on XX/XX/XXXX. ( See enclosed ) When I agreed to COVID19 Cares Act program, Synchrony Banks representative misrepresented material facts, when asked about backup interest : NO BACKUP INTERESTS WILL BE ADDED. ONLY PAY WHAT YOU CURRENTLY OWE. \n\nThis above behavior goes against Synchrony Banks Code of Conduct, which states : Each employee, officer and director should protect the Companys reputation by dealing fairly and honestly with Synchrony Financials clients, customers, service providers, regulators, employees and the public. No one should take unfair advantage of another through manipulation, concealment, abuse of privileged information, misrepresentation of material facts or any other unfair practice. We are committed to customer transparency and fairness. \nOur Policy : Promote fair customer treatment and prevent unfair, deceptive or abusive practices and illegal discrimination Moreover, the misrepresentation and concealment of material facts from the call to the written agreement goes against : Under the Dodd-Frank Wall Street Reform and Consumer Protection Act ( Dodd-Frank Act ), it is unlawful for any provider of consumer financial products or services or a service provider to engage in any unfair, deceptive, or abusive act or practice. \n\nI am formally requesting the removal of all negative history from my credit history due to : 1.COVID19 Cares Act program with a written contract. ( See enclosed ) 2.COVID19 Cares Act program written contract overrules the old agreement. \n3.Synchrony Banks representative concealed and misrepresented material facts on our call. \nSynchrony Banks unfair, deceptive, and abusive practice have caused me extreme financial hardship for over two years and with this letter I am requesting for all the negative history to be removed from my credit bureaus ( XXXX, XXXX, XXXX ) as soon as possible. \n\nThank you in advance and I hope to hear from you as soon as possible. This is an urgent matter.",
+      "ground_truth": "Credit card or prepaid card",
+      "ground_truth_bucket": "credit_card/prepaid_card",
+      "v1": {
+        "predicted": "Credit Card",
+        "bucket": "credit_card",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "credit_reporting",
+        "bucket": "credit_reporting",
+        "match": false,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "PayPal has made me wait days and days after I called and asked them numerous times to solve 2 issues that I was facing. One issue occurs when I attempt to transfer my PayPal balance to my debit card. At the time, I had around {$120.00} in my PayPal balance which could be used to make purchases or could be transferred to my bank. They made me wait days and days and didn't tell me that the reason why I couldn't transfer my money to my debit card was that the free service to transfer the funds which takes 1-3 business days is unavailable for cards and that instead I would have to use the instant transfer which charged about a 2.75 % fee. After calling numerous times, the final representative I spoke to informed me of this, and we attempted to link my XXXX XXXX XXXX XXXX XXXX account to my PayPal account, but the representative told me that this credit union wasn't allowed for some reason because it posed a \" risk ''. They ended up linking my XXXX XXXX account instead, and I transferred my PayPal balance over to it. They won't allow my preferred bank which is XXXX because they say it poses a risk. The second major problem I'm having with PayPal is that they wont ' allow me to use my PayPal balance anywhere, because they say that it poses a \" risk ''. I spoke to the representative for over an hour, she told me that every single place I attempted to make a purchase, based on them monitoring my activities over the past month, was flagged as too \" risky '' for my PayPal balance to be used, and that instead I would be forced to use a different payment method like a credit card. They are not allowing me to use my balance anywhere to make a purchase, not even XXXX because they're saying that there's a \" risk ''. They won't allow me to use my PayPal balance to make purchases, they won't allow me to use the credit union of my choice to transfer my PayPal funds, and their reasoning behind all of this makes no sense. How is XXXX too \" risky '' for me to use my PayPal balance to make a purchase, but not too \" risky '' for me to use a credit card through PayPal? They won't allow me to use my PayPal balance to buy things. It's my money. It's my right as an account holder to use my PayPal balance to purchase things, they're not allowing me to do so. They made me wait days to find all of this out. They refuse to allow me to send funds to my account with XXXX XXXX XXXX XXXX XXXX, so I had to use my XXXX XXXX account instead, and I didn't want to do that. They won't allow me to send funds to my bank of choice and they won't allow me to use my PayPal balance to make purchases online.",
+      "ground_truth": "Money transfer, virtual currency, or money service",
+      "ground_truth_bucket": "money_transfer",
+      "v1": {
+        "predicted": "Money Transfer / Virtual Wallet (PayPal)",
+        "bucket": "money_transfer",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "money_transfer",
+        "bucket": "money_transfer",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "I keep calling carmax auto finance to discuss the balance owed and to try and bring account back in good standing. Every representative gives different amounts. Then Im told if I make a payment they arent able to provide a receipt. Ive asked Carmax to put in writing the payment agreement and sass promised they would send by email in 24hours. The next day different rep stated they are not sending letter. I ask for statements of proof of balance they refuse to send by email or let me view online or make a payment online. Only can make payment by phone through rep but no commitment from Carmax they will honor their words. Ive asked for all late fees to be removed and they still wont provide me with a statement or nothing for proof.",
+      "ground_truth": "Debt collection",
+      "ground_truth_bucket": "debt_collection",
+      "v1": {
+        "predicted": "Auto Loan",
+        "bucket": "vehicle_loan",
+        "match": false,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "vehicle_loan",
+        "bucket": "vehicle_loan",
+        "match": false,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "Previous landlord attempting to collect a debt I do not owe. The debt includes a fee for a couch removal- I have a video of the couch being picked up/removed by the department of sanitation for my city. I have proof of this and proof I left the apartment at the end of my lease term and in immaculate condition. I took video evidence. I have attempted to dispute this debt and the collection agency is not responsive to my attempts to reach them. I have been told that the company is no longer in service and I have not been given the chance to prove that I do not owe this debt and that it is fraudulent. I have not been able to leave messages, or get responses to letters I have mailed to this company. This is a debt that is WRONG and is on my credit report and is hurting my financial status. Please help me exercise my rights and resolve this issue. I am not being treated fairly by this company. I can send you the video evidence to support my statements. Below is the information of the collection account : XXXX XXXX XXXX, on behalf of XXXX XXXX , XXXX ( my previous landlord ). Their address is XXXX XXXX XXXX # XXXX, XXXX XXXX, CA XXXX. I am attaching proof that I gave proper notice to vacate the apartment and a confirmation email from the NY DOS that I made a request for them to remove such items and where to place them ( prior to me leaving the apartment ).",
+      "ground_truth": "Debt collection",
+      "ground_truth_bucket": "debt_collection",
+      "v1": {
+        "predicted": "Debt Collection / Credit Reporting",
+        "bucket": "credit_reporting",
+        "match": false,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "debt_collection",
+        "bucket": "debt_collection",
+        "match": true,
+        "valid_category": true
+      }
+    },
+    {
+      "text": "3x I am complaining since nothing has been done by WELL FARGO. On XX/XX/XXXX I deposited TWO XXXX money orders at a WF ATM in XXXX XXXX. I bought these with my debit cards next door at a post office and paid {$2.00} each. I was going to deposit cash at the branch but had to go to work and the ONE teller had 5 people on line. I put the cash in my car and used my debit cards from XXXX and XXXX to buy these 2 money orders. Somehow the next day I get a call from WF ( XXXX hours after the deposit ) that the MO are fraudulent. I said that's impossible. he said with his thick and hard-to-understand accent that I am basically a crook. My acct online said the checks are being held for 10 days to clear. Then I get a notice that my acct is being closed for fraud!!! So my account is closed with {$1000.00} in the acct which I have never received and WELLS FARGO HAS STOLEN MY XXXX MONEY ORDERS X2!!!! tHEY OWE ME THIS MONEY. it's mine. After my previous complaints to the CFPB on this matter, all I get is the standard CFBP form that WF needs more time. In the meantime, those 2 MO deposits have disappeared from my acct and I only have XXXX in it which I can not access. I did get a call from a XXXX XXXX @ XXXX ext XXXX who told me basically to shove it while she takes 10 days to look at it. I also got a call from a \" XXXX ''. both people do not return my calls. Im out all this money while they decided that I commit fraud!! I get a letter today that my deposits on XX/XX/XXXX ( they even have the incorrect date, it was XX/XX/XXXX ) have been researched and I am not entitled to them. No reason for the \" not entitled to them '' statement. Who decided this? What experience do they have in these situations? Not one reason has been forthcoming. I am closing copies of the XXXX money orders and the letter they sent denying my XXXX XXXX deposits. This bank has a history of paying huge fines to the US government for opening accounts for people who did not know they did this ... charging them exorbitant fees and also huge interest on auto loans. I WILL NOT BE A STOOGE FOR THEIR ANTICS. If I DO NOT GET MY FUNDS FORTHWITH, I WILL SUE THEM AND ACTUALLY SHOW UP IN COURT WITH MY RECEIPTS. I can use XXXX small claims court to start and my brother is corporate lawyer who would do this for me gratis. Show me proof of fraud. I enclose all the documents.After just checking my account online, even my XXXX balance is gone.. it shows ZERO balance!!!",
+      "ground_truth": "Checking or savings account",
+      "ground_truth_bucket": "checking_savings",
+      "v1": {
+        "predicted": "Checking or savings account",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": false
+      },
+      "v2": {
+        "predicted": "checking_savings",
+        "bucket": "checking_savings",
+        "match": true,
+        "valid_category": true
+      }
+    }
+  ],
+  "summary": {
+    "n": 12,
+    "v1_match": 7,
+    "v2_match": 9,
+    "v1_valid": 0,
+    "v2_valid": 12
+  }
+}

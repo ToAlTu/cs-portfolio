@@ -1,0 +1,42 @@
+[
+  {
+    "id": "A_high_identity_theft",
+    "tier": "core",
+    "text": "I discovered an account with XXXX XXXX that I never opened. I received a card in the mail for a credit card I did not apply for. When I called they confirmed an account was opened in XX/XX/XXXX using my information. I have never authorized this and I am a victim of identity theft. This is now showing on my credit report and I need it removed immediately.",
+    "cfpb_product": null,
+    "cfpb_issue": null,
+    "note": "HIGH expected -- unauthorized account / identity theft (clear regulated harm)"
+  },
+  {
+    "id": "B_high_fcra_dispute",
+    "tier": "core",
+    "text": "I have disputed this same incorrect balance THREE times. The account shows a past due amount of $XXXX that I already paid in full in XX/XX/XXXX. I sent proof of payment. They keep verifying it as accurate without investigating. This error is hurting my credit score and I have been denied a loan because of it.",
+    "cfpb_product": null,
+    "cfpb_issue": null,
+    "note": "HIGH expected -- credit-report error persists after dispute (FCRA)"
+  },
+  {
+    "id": "C_low_service",
+    "tier": "core",
+    "text": "I am very unhappy with this bank. I went to my local branch and it closed at XXXX even though the website said it was open later. The teller was rude and I waited almost 30 minutes. I have been a customer for years and this is not the service I expect. I am thinking about switching banks.",
+    "cfpb_product": null,
+    "cfpb_issue": null,
+    "note": "LOW expected -- service dissatisfaction, no alleged violation"
+  },
+  {
+    "id": "D_ambiguous_scam",
+    "tier": "extended",
+    "text": "I sent a wire transfer of $XXXX to someone I met online who said they would help me invest. Now I cannot reach them and the money is gone. I asked my bank to reverse it but they said they cannot. I think the bank should have warned me this was a scam. Someone needs to give me my money back.",
+    "cfpb_product": null,
+    "cfpb_issue": null,
+    "note": "AMBIGUOUS -- authorized-push-payment scam; bank liability unclear, regulatory flag expected"
+  },
+  {
+    "id": "E_ambiguous_multiproduct",
+    "tier": "extended",
+    "text": "Something is going on with my accounts and I cannot get a straight answer. Money came out that I do not think I authorized, and there is also a charge from XX/XX/XXXX that I do not recognize. When I checked, there was an account or service listed that I do not remember opening. I have called XXXX several times and each person tells me something different and sends me to another department. Honestly I am not sure if this is a problem with my card, my checking account, or something on my credit report. I just need someone to figure out what actually happened and make it stop.",
+    "cfpb_product": null,
+    "cfpb_issue": null,
+    "note": "AMBIGUOUS -- genuinely unclear product (card vs deposit vs credit report) and unclear if fraud or error; should yield LOW confidence and trip the human-hold gate"
+  }
+]
